@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/context/CartContext";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { PageTransition } from "@/components/PageTransition";
+import { CustomCursor } from "@/components/CustomCursor";
+import { Navbar } from "@/components/Navbar";
+import { CartDrawer } from "@/components/CartDrawer";
+import { Footer } from "@/components/Footer";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -36,7 +43,19 @@ export default function RootLayout({
       lang="en"
       className={`${playfairDisplay.variable} ${dmSans.variable} ${dmMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <CartProvider>
+          <SmoothScroll>
+            <PageTransition>
+              <CustomCursor />
+              <Navbar />
+              <CartDrawer />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </PageTransition>
+          </SmoothScroll>
+        </CartProvider>
+      </body>
     </html>
   );
 }
