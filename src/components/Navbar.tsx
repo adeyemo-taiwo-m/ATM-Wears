@@ -43,16 +43,31 @@ export const Navbar: React.FC = () => {
 
         {/* Links (Desktop) */}
         <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
-          {CONFIG.navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={pathname === link.href ? 'active' : ''}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          <li>
+            <Link href="/" className={pathname === '/' ? 'active' : ''}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/#drops" className={pathname === '/#drops' ? 'active' : ''}>
+              New Arrival
+            </Link>
+          </li>
+          <li>
+            <Link href="/shop" className={pathname === '/shop' ? 'active' : ''}>
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link href="#footer" className={pathname === '#footer' ? 'active' : ''}>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className={pathname === '/about' ? 'active' : ''}>
+              About Us
+            </Link>
+          </li>
         </ul>
 
         {/* Actions */}
@@ -73,7 +88,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Account */}
-          <Link href="/account" aria-label="Account" className="nav-icon-btn">
+          <Link href="/account" aria-label="Account" className="nav-icon-btn md:hidden">
             <svg
               width="18"
               height="18"
@@ -85,6 +100,10 @@ export const Navbar: React.FC = () => {
               <circle cx="12" cy="8" r="4" />
               <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
             </svg>
+          </Link>
+
+          <Link href="/account" className="btn-nav-signin hidden md:inline-block">
+            Sign In
           </Link>
 
           {/* Cart Trigger */}
