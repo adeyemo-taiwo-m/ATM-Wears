@@ -1144,3 +1144,180 @@ button {
   content: 'DRAG';
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   SUB-PAGES OVERHAUL STYLES
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* 1. Shop Cards Size Overlay */
+.shop-product-card-quick-add {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(245, 244, 240, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: var(--space-3);
+  transform: translateY(101%);
+  transition: transform 0.4s var(--ease-out-expo);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 10;
+  border-top: 1px solid var(--void-bone);
+}
+
+.product-card:hover .shop-product-card-quick-add {
+  transform: translateY(0);
+}
+
+.quick-add-sizes {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.quick-size-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--void-charcoal);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+  cursor: pointer;
+}
+
+.quick-size-btn:hover {
+  background: var(--void-charcoal);
+  color: var(--void-white);
+  transform: scale(1.05);
+}
+
+/* 2. Floating Input Labels */
+.floating-label-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.floating-input {
+  width: 100%;
+  padding: 14px 4px 6px;
+  border: none;
+  border-bottom: 1px solid var(--void-ash);
+  background: transparent;
+  color: var(--void-charcoal);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: border-color var(--duration-base) var(--ease-out-expo);
+}
+
+.floating-input:focus {
+  border-color: var(--void-charcoal);
+}
+
+.floating-label {
+  position: absolute;
+  top: 12px;
+  left: 4px;
+  color: var(--void-ash);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+  transition: transform 0.4s var(--ease-out-expo), color 0.4s var(--ease-out-expo);
+  transform-origin: left top;
+}
+
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label {
+  transform: translateY(-20px) scale(0.8);
+  color: var(--void-charcoal);
+}
+
+/* 3. Dashboard/Checkout Selection Tabs */
+.dashboard-tabs {
+  display: flex;
+  border-bottom: 1.5px solid var(--void-bone);
+  margin-bottom: 32px;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dashboard-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard-tab-btn {
+  padding: 12px 4px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--void-ash);
+  position: relative;
+  transition: color 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dashboard-tab-btn:hover {
+  color: var(--void-charcoal);
+}
+
+.dashboard-tab-btn.active {
+  color: var(--void-charcoal);
+  font-weight: 500;
+}
+
+.dashboard-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1.5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--void-charcoal);
+}
+
+/* Payment Type Selectors */
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.payment-method-card {
+  border: 1px solid var(--void-bone);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: border-color 0.2s, background 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.payment-method-card:hover {
+  border-color: var(--void-charcoal);
+}
+
+.payment-method-card.active {
+  border-color: var(--void-charcoal);
+  background: var(--void-bone)/20;
+}
+
+
