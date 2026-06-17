@@ -37,10 +37,10 @@ export default function Home() {
 
   // Category hover preview images
   const categoryImages: { [key: string]: string } = {
-    tops: '/assets/images/tee-01-front.jpg',
-    bottoms: '/assets/images/trouser-01.jpg',
-    outerwear: '/assets/images/blazer-01.jpg',
-    dresses: '/assets/images/dress-01.jpg',
+    tops: '/assets/images/hero-orange.png',
+    bottoms: '/assets/images/hero-blue-suit.png',
+    outerwear: '/assets/images/hero-green-coat.png',
+    dresses: '/assets/images/hero-sunglasses.png',
   };
 
   useEffect(() => {
