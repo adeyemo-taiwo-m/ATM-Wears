@@ -49,23 +49,18 @@ export const Navbar: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link href="/#drops" className={pathname === '/#drops' ? 'active' : ''}>
-              New Arrival
-            </Link>
-          </li>
-          <li>
             <Link href="/shop" className={pathname === '/shop' ? 'active' : ''}>
               Shop
             </Link>
           </li>
           <li>
-            <Link href="#footer" className={pathname === '#footer' ? 'active' : ''}>
-              Contact
+            <Link href="/lookbook" className={pathname === '/lookbook' ? 'active' : ''}>
+              Lookbook
             </Link>
           </li>
           <li>
             <Link href="/about" className={pathname === '/about' ? 'active' : ''}>
-              About Us
+              Manifesto
             </Link>
           </li>
         </ul>

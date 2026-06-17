@@ -9,7 +9,7 @@ import gsap from 'gsap';
 
 function ShopContent() {
   const searchParams = useSearchParams();
-  const initialCat = searchParams.get('cat') || 'all';
+  const initialCat = searchParams.get('category') || searchParams.get('cat') || 'all';
 
   const { addToCart } = useCart();
   const [selectedCat, setSelectedCat] = useState(initialCat);
@@ -18,7 +18,7 @@ function ShopContent() {
 
   // Sync category filter with query parameter if it changes
   useEffect(() => {
-    const cat = searchParams.get('cat') || 'all';
+    const cat = searchParams.get('category') || searchParams.get('cat') || 'all';
     setSelectedCat(cat);
   }, [searchParams]);
 
