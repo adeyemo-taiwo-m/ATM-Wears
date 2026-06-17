@@ -533,6 +533,94 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The Street Lab Section */}
+      <section id="street-lab" className="py-24 px-6 md:px-12 border-t border-void-bone/10 border-b border-void-bone/10">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-3">
+                [ SYSTEM ARCHIVE ] / METALLICS & DISTRESS
+              </p>
+              <h2 className="text-4xl md:text-5xl font-display font-medium text-void-white tracking-tight">
+                THE STREET LAB.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm text-void-ash font-light leading-relaxed">
+              An experimental showcase of heavy-weight textiles, protective silhouettes, and deconstructed street capsules tailored for the design-conscious.
+            </p>
+          </div>
+
+          {/* Panels Container */}
+          <div className="lab-panels-container">
+            
+            {/* Panel 01 */}
+            <div className="lab-panel group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/assets/images/capsule-01.jpg" 
+                alt="Neo-Metallic Future Form Edit" 
+                className="lab-panel-img"
+              />
+              <div className="lab-panel-overlay" />
+              <div className="lab-panel-content">
+                <span className="lab-panel-tag">CAPSULE // 01 • NEO-FORM</span>
+                <h3 className="lab-panel-title">FUTURE SILHOUETTE</h3>
+                <p className="lab-panel-details">
+                  Volume, metallic textures, and sculptural protection. Exploring organic cotton pink puffers, high-insulation collars, and structured leather bombers.
+                </p>
+                <Link href="/shop?category=outerwear" className="lab-panel-cta">
+                  Explore Silhouette <span>→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Panel 02 */}
+            <div className="lab-panel group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/assets/images/capsule-02.jpg" 
+                alt="Deconstructed Denim Jeans" 
+                className="lab-panel-img"
+              />
+              <div className="lab-panel-overlay" />
+              <div className="lab-panel-content">
+                <span className="lab-panel-tag">CAPSULE // 02 • JJ DENIM</span>
+                <h3 className="lab-panel-title">DECONSTRUCTED DENIM</h3>
+                <p className="lab-panel-details">
+                  Sartorial utility expressed through heavy-weight Japanese denim. Wide-leg cuts, contrast stitching, metal rivets, and raw stack hems.
+                </p>
+                <Link href="/shop?category=bottoms" className="lab-panel-cta">
+                  Shop Denim Edit <span>→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Panel 03 */}
+            <div className="lab-panel group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/assets/images/capsule-03.jpg" 
+                alt="Gothic Grunge Streetwear" 
+                className="lab-panel-img"
+              />
+              <div className="lab-panel-overlay" />
+              <div className="lab-panel-content">
+                <span className="lab-panel-tag">CAPSULE // 03 • ANARCHY</span>
+                <h3 className="lab-panel-title">GOTHIC GRUNGE</h3>
+                <p className="lab-panel-details">
+                  Matte black forms meet distressed Y2K vibes. Features shredded logo graphic hoodies, tie-dye cotton, and multi-strap utility cargo panels.
+                </p>
+                <Link href="/shop?category=tops" className="lab-panel-cta">
+                  Shop Grunge <span>→</span>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Horizontal Scroll Lookbook Section */}
       <section ref={horizontalSectionRef} className="horizontal-scroll-container bg-[#1A1A18]" id="lookbook-horizontal-section">
         <div ref={horizontalWrapperRef} className="horizontal-scroll-wrapper">

@@ -1385,4 +1385,176 @@ button {
   }
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   THE STREET LAB (CAPSULE SHOWCASE)
+   ───────────────────────────────────────────────────────────────────────── */
+
+#street-lab {
+  background: #0d0d0b;
+  color: var(--void-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.lab-panels-container {
+  display: flex;
+  gap: var(--space-4);
+  height: 600px;
+  width: 100%;
+}
+
+.lab-panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #151513;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.lab-panel-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s;
+  filter: grayscale(20%) brightness(95%);
+}
+
+.lab-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 13, 11, 0.95) 0%, rgba(13, 13, 11, 0.4) 50%, transparent 100%);
+  opacity: 0.85;
+  transition: opacity 0.6s;
+  z-index: 2;
+}
+
+.lab-panel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-8);
+  z-index: 3;
+  transform: translateY(20px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-panel-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--void-white);
+  opacity: 0.6;
+  margin-bottom: var(--space-2);
+}
+
+.lab-panel-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--void-white);
+  line-height: 1.2;
+}
+
+.lab-panel-details {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s, height 0.4s, margin-top 0.4s;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.lab-panel-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FFD700;
+  font-weight: 600;
+  transition: color var(--duration-fast), transform var(--duration-fast);
+}
+
+/* Hover Effects on Desktop */
+@media (min-width: 1024px) {
+  .lab-panels-container:hover .lab-panel {
+    flex: 0.6;
+  }
+  
+  .lab-panels-container .lab-panel:hover {
+    flex: 2.2;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .lab-panel:hover .lab-panel-img {
+    transform: scale(1.05);
+    filter: grayscale(0%) brightness(100%);
+  }
+  
+  .lab-panel:hover .lab-panel-overlay {
+    opacity: 0.9;
+  }
+  
+  .lab-panel:hover .lab-panel-content {
+    transform: translateY(0);
+  }
+  
+  .lab-panel:hover .lab-panel-details {
+    opacity: 1;
+    height: auto;
+    margin-top: var(--space-3);
+  }
+
+  .lab-panel-cta:hover {
+    color: var(--void-white);
+    transform: translateX(4px);
+  }
+}
+
+/* Mobile & Tablet Layout */
+@media (max-width: 1023px) {
+  .lab-panels-container {
+    flex-direction: column;
+    height: auto;
+    gap: var(--space-4);
+  }
+
+  .lab-panel {
+    flex: none;
+    height: 380px;
+    width: 100%;
+  }
+
+  .lab-panel-img {
+    filter: grayscale(0%) brightness(95%);
+  }
+
+  .lab-panel-content {
+    transform: translateY(0);
+    padding: var(--space-6);
+  }
+
+  .lab-panel-details {
+    opacity: 1;
+    height: auto;
+    margin-top: var(--space-2);
+  }
+}
+
+
 
