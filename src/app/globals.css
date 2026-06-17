@@ -822,9 +822,9 @@ button {
 
 /* 1. Category Hover Showcase */
 .category-reveal-section {
-  background: var(--void-white);
   border-top: 1px solid var(--void-bone);
   border-bottom: 1px solid var(--void-bone);
+  transition: background-color 0.7s var(--ease-in-out);
 }
 
 .category-list-item {
@@ -1318,6 +1318,71 @@ button {
 .payment-method-card.active {
   border-color: var(--void-charcoal);
   background: var(--void-bone)/20;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   VIBRANT COLORFUL TICKER & CONVERSION ACTIONS
+   ───────────────────────────────────────────────────────────────────────── */
+
+.ticker-band {
+  background: linear-gradient(135deg, #F05A28 0%, #FFD700 50%, #4CA3D9 100%);
+  color: var(--void-white);
+  overflow: hidden;
+  padding: var(--space-4) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(240, 90, 40, 0.12);
+  position: relative;
+  z-index: 10;
+}
+
+.ticker-track {
+  display: flex;
+  gap: var(--space-8);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: ticker-slide 25s linear infinite;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes ticker-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Persistent Mobile Quick-Add Button Overlay */
+.product-card-mobile-quick-add {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--void-white);
+  color: var(--void-charcoal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  z-index: 5;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s, color 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.product-card-mobile-quick-add:active {
+  transform: scale(0.9);
+}
+
+@media (min-width: 1024px) {
+  /* Hide mobile quick add on large desktop view because the hover slide-up CTA is active */
+  .product-card-mobile-quick-add {
+    display: none;
+  }
 }
 
 

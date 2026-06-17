@@ -15,6 +15,7 @@ export default function Home() {
   const { addToCart } = useCart();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [hoveredColor, setHoveredColor] = useState<string>('');
 
   // Newsletter Form State
   const [email, setEmail] = useState('');
@@ -203,10 +204,18 @@ export default function Home() {
     if (floatingImgRef.current) {
       floatingImgRef.current.classList.add('active');
     }
+    const colors: { [key: string]: string } = {
+      tops: '#F05A28',
+      bottoms: '#4CA3D9',
+      outerwear: '#2E6B4B',
+      dresses: '#FFD700',
+    };
+    setHoveredColor(colors[cat] || '');
   };
 
   const handleCategoryMouseLeave = () => {
     setHoveredCategory(null);
+    setHoveredColor('');
     if (floatingImgRef.current) {
       floatingImgRef.current.classList.remove('active');
     }
@@ -445,6 +454,7 @@ export default function Home() {
         ref={categoryContainerRef}
         onMouseMove={handleCategoryMouseMove}
         className="category-reveal-section py-24 relative overflow-hidden"
+        style={{ backgroundColor: hoveredColor ? `${hoveredColor}1f` : 'var(--void-white)' }}
       >
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs uppercase tracking-[0.2em] opacity-40 mb-12">Collections / Edit</p>
@@ -640,6 +650,20 @@ export default function Home() {
                       />
                     )}
                     {product.tag && <div className="product-card-tag">{product.tag}</div>}
+                    <button
+                      className="product-card-mobile-quick-add"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        addToCart(product, product.sizes[0]);
+                      }}
+                      aria-label={`Quick Add ${product.name} to Cart`}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                    </button>
                   </div>
                   <div className="product-card-info mt-4">
                     <h3 className="product-card-name text-sm font-body font-normal">{product.name}</h3>
