@@ -915,21 +915,16 @@ button {
   height: 100%;
   flex-shrink: 0;
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .lookbook-slide {
-    grid-template-columns: 1fr 1fr;
-  }
+  display: block;
 }
 
 .slide-media {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
   overflow: hidden;
-  position: relative;
 }
 
 .slide-media img {
@@ -940,58 +935,198 @@ button {
 }
 
 .slide-content {
-  padding: var(--space-8) var(--grid-gutter);
+  position: absolute;
+  bottom: var(--space-12);
+  right: var(--space-12);
+  width: calc(100% - 2 * var(--space-12));
+  max-width: 450px;
+  z-index: 10;
+  padding: var(--space-8);
+  border-radius: 1.5rem;
+  background: rgba(13, 13, 11, 0.75) !important;
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background: var(--void-white);
-  height: 100%;
+  color: var(--void-white) !important;
 }
 
 @media (max-width: 767px) {
   .slide-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: rgba(245, 244, 240, 0.95);
-    backdrop-filter: blur(10px);
+    bottom: var(--space-6);
+    right: var(--space-6);
+    left: var(--space-6);
+    width: auto;
+    max-width: none;
+    padding: var(--space-6);
+    background: rgba(13, 13, 11, 0.85) !important;
   }
 }
 
 .slide-title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  line-height: 1.05;
-  margin-bottom: var(--space-4);
-  color: var(--void-ink);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-3);
+  color: var(--void-white) !important;
 }
 
 .slide-desc {
-  font-size: var(--text-md);
-  color: var(--void-charcoal);
-  margin-bottom: var(--space-8);
-  max-width: 480px;
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: var(--space-6);
+  line-height: 1.6;
+  font-weight: 300;
 }
 
 .slide-shop-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--void-charcoal);
-  border-bottom: 1px solid var(--void-charcoal);
-  padding-bottom: 4px;
+  color: #FFD700 !important;
   width: fit-content;
-  transition: opacity 0.3s;
+  transition: color var(--duration-fast), transform var(--duration-fast);
 }
 
 .slide-shop-link:hover {
-  opacity: 0.7;
+  color: var(--void-white) !important;
+  transform: translateX(4px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LOOKBOOK INTERACTIVE HOTSPOTS
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hotspot-container {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hotspot-group {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.hotspot-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--void-white);
+  border: 2.5px solid var(--void-charcoal);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s;
+}
+
+.hotspot-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1.5px solid var(--void-white);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: hotspot-pulse 2s infinite;
+}
+
+@keyframes hotspot-pulse {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.hotspot-group:hover .hotspot-dot {
+  transform: scale(1.2);
+  background: #FFD700;
+  border-color: var(--void-white);
+}
+
+.hotspot-card {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 180px;
+  background: rgba(13, 13, 11, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.hotspot-group:hover .hotspot-card {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.hotspot-card-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--void-bone);
+}
+
+.hotspot-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hotspot-card-name {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--void-white);
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hotspot-card-price {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.hotspot-card-atc {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  background: var(--void-white);
+  color: var(--void-charcoal);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-align: center;
+}
+
+.hotspot-card-atc:hover {
+  background: #FFD700;
+  color: var(--void-charcoal);
 }
 
 /* Progress bar indicator for horizontal scrolling */
@@ -1001,13 +1136,13 @@ button {
   left: var(--grid-gutter);
   right: var(--grid-gutter);
   height: 2px;
-  background: rgba(26, 26, 24, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   z-index: 10;
 }
 
 .scroll-progress-bar {
   height: 100%;
-  background: var(--void-charcoal);
+  background: #FFD700;
   width: 0%;
   will-change: width;
 }

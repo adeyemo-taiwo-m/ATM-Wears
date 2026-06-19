@@ -273,6 +273,43 @@ export default function Home() {
 
   const latestDrops = PRODUCTS.slice(0, 6);
 
+  // Lookbook items lookup
+  const lookbookProducts = {
+    'vw-001': PRODUCTS.find(p => p.id === 'vw-001') || PRODUCTS[0],
+    'vw-002': PRODUCTS.find(p => p.id === 'vw-002') || PRODUCTS[1],
+    'vw-003': PRODUCTS.find(p => p.id === 'vw-003') || PRODUCTS[2],
+    'vw-004': PRODUCTS.find(p => p.id === 'vw-004') || PRODUCTS[3],
+    'vw-005': PRODUCTS.find(p => p.id === 'vw-005') || PRODUCTS[4],
+    'vw-006': PRODUCTS.find(p => p.id === 'vw-006') || PRODUCTS[5],
+  };
+
+  const renderHotspot = (prodId: keyof typeof lookbookProducts, coordinates: { top: string; left: string }) => {
+    const prod = lookbookProducts[prodId];
+    return (
+      <div className="hotspot-group" style={{ top: coordinates.top, left: coordinates.left }}>
+        <div className="hotspot-dot" />
+        <div className="hotspot-card">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={prod.images[0]} alt={prod.name} className="hotspot-card-img" />
+          <div className="hotspot-card-info">
+            <h4 className="hotspot-card-name">{prod.name}</h4>
+            <span className="hotspot-card-price">₦{prod.price.toLocaleString()}</span>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                addToCart(prod, prod.sizes[0]);
+              }}
+              className="hotspot-card-atc"
+            >
+              Quick Add
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const manifestoText = "Fashion doesn't need a gender. It needs intention.";
   const manifestoWords = manifestoText.split(" ");
 
@@ -630,17 +667,27 @@ export default function Home() {
             <div className="slide-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/editorial-01.jpg" alt="Lookbook Slide 1" />
+              
+              {/* Hotspots Container */}
+              <div className="hotspot-container">
+                {renderHotspot('vw-001', { top: '42%', left: '33%' })}
+                {renderHotspot('vw-002', { top: '78%', left: '27%' })}
+              </div>
             </div>
-            <div className="slide-content !bg-[#EDE9E0]">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] opacity-40 mb-6">SS 2026 Lookbook</p>
+            <div className="slide-content">
+              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-4">[ LOOK_01 // SS26 ]</p>
               <h2 className="slide-title">ABSENCE</h2>
-              <p className="slide-desc text-void-charcoal leading-relaxed font-light">
+              <p className="slide-desc">
                 When less becomes the loudest statement in the room. A curated study of volume, raw deadstock cotton, and structured simplicity tailored for Nigerian urban temperatures.
               </p>
-              <div className="mt-4 flex flex-col gap-2">
-                <span className="text-[11px] font-mono uppercase tracking-[0.1em] opacity-50">Wearing:</span>
-                <Link href="/product/vw-001" className="slide-shop-link">Void Oversized Tee</Link>
-                <Link href="/product/vw-002" className="slide-shop-link">Form Wide Trouser</Link>
+              <div className="mt-2 flex flex-col gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
+                <Link href="/product/vw-001" className="slide-shop-link">
+                  [ 01: Void Oversized Tee ]
+                </Link>
+                <Link href="/product/vw-002" className="slide-shop-link">
+                  [ 02: Form Wide Trouser ]
+                </Link>
               </div>
             </div>
           </div>
@@ -650,17 +697,27 @@ export default function Home() {
             <div className="slide-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/editorial-02.jpg" alt="Lookbook Slide 2" />
+              
+              {/* Hotspots Container */}
+              <div className="hotspot-container">
+                {renderHotspot('vw-003', { top: '35%', left: '46%' })}
+                {renderHotspot('vw-005', { top: '55%', left: '43%' })}
+              </div>
             </div>
-            <div className="slide-content !bg-[#E2DDD4]">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] opacity-40 mb-6">SS 2026 Lookbook</p>
+            <div className="slide-content">
+              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-4">[ LOOK_02 // SS26 ]</p>
               <h2 className="slide-title">FORM</h2>
-              <p className="slide-desc text-void-charcoal leading-relaxed font-light">
+              <p className="slide-desc">
                 The physical body interpreted as modular architecture. Minimal seams, sculptural silhouettes, and unlined structures designed for quiet luxury and freedom of form.
               </p>
-              <div className="mt-4 flex flex-col gap-2">
-                <span className="text-[11px] font-mono uppercase tracking-[0.1em] opacity-50">Wearing:</span>
-                <Link href="/product/vw-003" className="slide-shop-link">Zero Jacket</Link>
-                <Link href="/product/vw-005" className="slide-shop-link">Structure Blazer</Link>
+              <div className="mt-2 flex flex-col gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
+                <Link href="/product/vw-003" className="slide-shop-link">
+                  [ 03: Zero Jacket ]
+                </Link>
+                <Link href="/product/vw-005" className="slide-shop-link">
+                  [ 04: Structure Blazer ]
+                </Link>
               </div>
             </div>
           </div>
@@ -670,17 +727,27 @@ export default function Home() {
             <div className="slide-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/hero-main.jpg" alt="Lookbook Slide 3" />
+              
+              {/* Hotspots Container */}
+              <div className="hotspot-container">
+                {renderHotspot('vw-004', { top: '65%', left: '48%' })}
+                {renderHotspot('vw-006', { top: '35%', left: '38%' })}
+              </div>
             </div>
-            <div className="slide-content !bg-[#F5F4F0]">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] opacity-40 mb-6">SS 2026 Lookbook</p>
+            <div className="slide-content">
+              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-4">[ LOOK_03 // SS26 ]</p>
               <h2 className="slide-title">IDENTITY</h2>
-              <p className="slide-desc text-void-charcoal leading-relaxed font-light">
+              <p className="slide-desc">
                 Unisex apparel crafted strictly using organic local deadstock materials. A quiet commitment to zero carbon footprints, zero excess, and infinite expression.
               </p>
-              <div className="mt-4 flex flex-col gap-2">
-                <span className="text-[11px] font-mono uppercase tracking-[0.1em] opacity-50">Wearing:</span>
-                <Link href="/product/vw-004" className="slide-shop-link">Void Maxi Dress</Link>
-                <Link href="/product/vw-006" className="slide-shop-link">Ghost Long Sleeve</Link>
+              <div className="mt-2 flex flex-col gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
+                <Link href="/product/vw-004" className="slide-shop-link">
+                  [ 05: Void Maxi Dress ]
+                </Link>
+                <Link href="/product/vw-006" className="slide-shop-link">
+                  [ 06: Ghost Long Sleeve ]
+                </Link>
               </div>
             </div>
           </div>
