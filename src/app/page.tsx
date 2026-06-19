@@ -814,8 +814,45 @@ export default function Home() {
           {latestDrops.map((product) => (
             <div key={product.id} className="drops-carousel-item" onClick={handleProductCardClick}>
               <article className="product-card group relative">
+                {/* Floating Tag */}
+                {product.tag && <div className="product-card-badge">{product.tag}</div>}
+
+                {/* Floating Actions */}
+                <div className="product-card-actions">
+                  {/* Wishlist Button */}
+                  <button 
+                    className="product-action-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    aria-label={`Add ${product.name} to Wishlist`}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                  </button>
+                  
+                  {/* Quick Add Button */}
+                  <button 
+                    className="product-action-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      addToCart(product, product.sizes[0]);
+                    }}
+                    aria-label={`Quick Add ${product.name} to Cart`}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </button>
+                </div>
+
                 <Link href={`/product/${product.id}`} className="product-card-link" draggable="false">
-                  <div className="product-card-media relative aspect-[3/4] overflow-hidden bg-void-bone">
+                  <div className="product-card-media">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={product.images[0]}
@@ -834,39 +871,23 @@ export default function Home() {
                         draggable="false"
                       />
                     )}
-                    {product.tag && <div className="product-card-tag">{product.tag}</div>}
-                    <button
-                      className="product-card-mobile-quick-add"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        addToCart(product, product.sizes[0]);
-                      }}
-                      aria-label={`Quick Add ${product.name} to Cart`}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="product-card-info mt-4">
-                    <h3 className="product-card-name text-sm font-body font-normal">{product.name}</h3>
-                    <div className="product-card-bottom flex justify-between items-center mt-2">
-                      <span className="product-card-price font-mono text-sm">₦{product.price.toLocaleString()}</span>
+                    
+                    {/* Image Overlay Gradient */}
+                    <div className="product-card-overlay" />
+                    
+                    {/* Card Details Overlay */}
+                    <div className="product-card-details-overlay">
+                      {/* Rating Overlay */}
+                      <div className="product-card-rating">
+                        <span className="product-card-rating-star">★</span>
+                        <span>4.9</span>
+                      </div>
+                      
+                      <h3 className="product-card-name-overlay">{product.name}</h3>
+                      <span className="product-card-price-overlay">₦{product.price.toLocaleString()}</span>
                     </div>
                   </div>
                 </Link>
-                <button
-                  className="product-card-atc"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    addToCart(product, product.sizes[0]);
-                  }}
-                >
-                  Add to Cart
-                </button>
               </article>
             </div>
           ))}
