@@ -1853,6 +1853,159 @@ button {
   font-size: 10px;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   HOMEPAGE RESPONSIVENESS OVERRIDES
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* 1. Mobile Menu Drawer Navigation */
+@media (max-width: 768px) {
+  .nav-logo,
+  .nav-actions {
+    position: relative;
+    z-index: 101; /* Stay visible on top of menu overlay (99) */
+  }
+
+  .nav-links {
+    display: flex !important; /* Override desktop display: none */
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(245, 244, 240, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 99;
+    padding: var(--space-32) var(--space-8) var(--space-8);
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+  }
+
+  .nav-links a {
+    font-size: var(--text-2xl) !important;
+    font-weight: 600;
+  }
+}
+
+/* 2. Category Hover Image Pointer Handling */
+@media (max-width: 1023px) {
+  .floating-category-img-container {
+    display: none !important; /* Hide fixed follower on touch viewports */
+  }
+}
+
+/* 3. Lookbook Mobile Stack Layout & Parallax Override */
+@media (max-width: 1023px) {
+  .horizontal-scroll-container {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .horizontal-scroll-wrapper {
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .lookbook-slide {
+    width: 100% !important;
+    height: 85vh !important;
+    min-height: 550px;
+  }
+
+  .scroll-progress-bar-container {
+    display: none !important; /* Hide progress line on mobile vertical list */
+  }
+}
+
+/* 4. Lookbook Hotspot Mobile Bottom Sheets */
+@media (max-width: 768px) {
+  .hotspot-card {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    transform: translateY(100%) !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 20px 20px 0 0 !important;
+    background: rgba(13, 13, 11, 0.96) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: var(--space-5) !important;
+    z-index: 10000 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: var(--space-4) !important;
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.4) !important;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s !important;
+  }
+  
+  .hotspot-group:hover .hotspot-card,
+  .hotspot-group:focus-within .hotspot-card {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .hotspot-card-img {
+    width: 65px !important;
+    height: 80px !important;
+    border-radius: 8px !important;
+    object-fit: cover !important;
+  }
+
+  .hotspot-card-info {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .hotspot-card-name {
+    font-size: var(--text-xs) !important;
+    color: var(--void-white) !important;
+    margin: 0 !important;
+    white-space: normal !important;
+  }
+
+  .hotspot-card-price {
+    font-size: var(--text-xs) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  .hotspot-card-atc {
+    width: auto !important;
+    padding: 8px 16px !important;
+    font-size: 10px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* 5. Footer Copyright Stack on Mobile */
+@media (max-width: 640px) {
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+    align-items: center;
+  }
+}
+
 
 
 

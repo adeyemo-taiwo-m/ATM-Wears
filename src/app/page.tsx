@@ -110,47 +110,51 @@ export default function Home() {
       }
     });
 
-    // 3. Horizontal Scroll Timeline for Lookbook
-    const lookbookWrapper = horizontalWrapperRef.current;
-    const horizontalSection = horizontalSectionRef.current;
-    if (lookbookWrapper && horizontalSection) {
-      const horizTween = gsap.to(lookbookWrapper, {
-        x: () => -(lookbookWrapper.scrollWidth - window.innerWidth),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: horizontalSection,
-          pin: true,
-          scrub: 1,
-          start: 'top top',
-          end: () => `+=${lookbookWrapper.scrollWidth - window.innerWidth}`,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const progressBar = document.getElementById('lookbook-progress');
-            if (progressBar) {
-              progressBar.style.width = `${self.progress * 100}%`;
+    // 3. Horizontal Scroll Timeline for Lookbook (Desktop Only)
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 1024px)", () => {
+      const lookbookWrapper = horizontalWrapperRef.current;
+      const horizontalSection = horizontalSectionRef.current;
+      if (lookbookWrapper && horizontalSection) {
+        const horizTween = gsap.to(lookbookWrapper, {
+          x: () => -(lookbookWrapper.scrollWidth - window.innerWidth),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: horizontalSection,
+            pin: true,
+            scrub: 1,
+            start: 'top top',
+            end: () => `+=${lookbookWrapper.scrollWidth - window.innerWidth}`,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const progressBar = document.getElementById('lookbook-progress');
+              if (progressBar) {
+                progressBar.style.width = `${self.progress * 100}%`;
+              }
             }
           }
-        }
-      });
+        });
 
-      // Horizontal parallax for lookbook slide images
-      gsap.utils.toArray('.slide-media img').forEach((img: any) => {
-        gsap.fromTo(img,
-          { xPercent: -12 },
-          {
-            xPercent: 12,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: img,
-              containerAnimation: horizTween,
-              start: 'left right',
-              end: 'right left',
-              scrub: true,
+        // Horizontal parallax for lookbook slide images
+        gsap.utils.toArray('.slide-media img').forEach((img: any) => {
+          gsap.fromTo(img,
+            { xPercent: -12 },
+            {
+              xPercent: 12,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: img,
+                containerAnimation: horizTween,
+                start: 'left right',
+                end: 'right left',
+                scrub: true,
+              }
             }
-          }
-        );
-      });
-    }
+          );
+        });
+      }
+    });
 
     // 4. Manifesto Text Reveal on Scroll
     gsap.to('.reveal-word', {
@@ -182,6 +186,7 @@ export default function Home() {
     );
 
     return () => {
+      mm.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -286,7 +291,7 @@ export default function Home() {
   const renderHotspot = (prodId: keyof typeof lookbookProducts, coordinates: { top: string; left: string }) => {
     const prod = lookbookProducts[prodId];
     return (
-      <div className="hotspot-group" style={{ top: coordinates.top, left: coordinates.left }}>
+      <div className="hotspot-group" style={{ top: coordinates.top, left: coordinates.left }} tabIndex={0}>
         <div className="hotspot-dot" />
         <div className="hotspot-card">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -328,8 +333,8 @@ export default function Home() {
           {/* Header/Title Row */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-16 relative">
             
-            {/* Left Play Badge */}
-            <div className="w-full md:w-1/6 flex justify-center md:justify-start" id="hero-play-badge">
+            {/* Left Play Badge (Desktop Only) */}
+            <div className="hidden md:flex w-full md:w-1/6 justify-center md:justify-start" id="hero-play-badge">
               <div className="spinning-badge-container" onClick={() => setIsVideoOpen(true)}>
                 <div className="spinning-badge-play">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
@@ -352,15 +357,57 @@ export default function Home() {
             </div>
 
             {/* Center Heading */}
-            <div className="w-full md:w-2/3 text-center overflow-hidden">
+            <div className="w-full md:w-2/3 text-center overflow-hidden flex flex-col items-center">
               <h1 className="font-body font-extrabold text-void-charcoal text-[2.5rem] md:text-[4.2rem] leading-[1.05] tracking-tight max-w-3xl mx-auto flex flex-col items-center">
                 <span className="hero-line block overflow-hidden">Elevate Your Style With</span>
                 <span className="hero-line block overflow-hidden text-void-ink">Bold Fashion</span>
               </h1>
+
+              {/* Mobile CTA */}
+              <div className="mt-8 md:hidden flex justify-center">
+                <Link href="/shop" className="explore-btn py-3 px-8 bg-void-charcoal text-void-white rounded-full font-mono text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-void-accent hover:text-void-charcoal transition-colors">
+                  Explore Collections
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="5" y1="19" x2="19" y2="5" />
+                    <polyline points="12 5 19 5 19 12" />
+                  </svg>
+                </Link>
+              </div>
+
+              {/* Mobile Auxiliary Row (Spinning Play Badge + Avatars) */}
+              <div className="flex md:hidden items-center justify-center gap-12 mt-10">
+                <div className="spinning-badge-container scale-90" onClick={() => setIsVideoOpen(true)}>
+                  <div className="spinning-badge-play">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </div>
+                  <svg className="spinning-badge-text animate-spin-slow" viewBox="0 0 100 100">
+                    <path
+                      id="badge-text-path-mobile"
+                      d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+                      fill="none"
+                    />
+                    <text fill="var(--void-charcoal)" className="text-[9px] font-mono tracking-[1.5px] uppercase">
+                      <textPath href="#badge-text-path-mobile" startOffset="0%">
+                        learn about us • through this video • 
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
+
+                <div className="avatar-stack scale-90">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/assets/images/tee-01-front.jpg" alt="User Avatar" className="avatar-stack-item" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/assets/images/trouser-01.jpg" alt="User Avatar" className="avatar-stack-item" />
+                  <div className="avatar-stack-plus">+</div>
+                </div>
+              </div>
             </div>
 
-            {/* Right Avatars */}
-            <div className="w-full md:w-1/6 flex justify-center md:justify-end" id="hero-avatars">
+            {/* Right Avatars (Desktop Only) */}
+            <div className="hidden md:flex w-full md:w-1/6 justify-center md:justify-end" id="hero-avatars">
               <div className="avatar-stack">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/tee-01-front.jpg" alt="User Avatar" className="avatar-stack-item" />
@@ -411,7 +458,7 @@ export default function Home() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-yellow-portrait.png" alt="Yellow portrait model" className="w-full h-full object-cover" draggable="false" />
               </div>
-              <div className="hero-card hero-card-anim" id="hero-explore-btn">
+              <div className="hero-card hero-card-anim hidden md:block" id="hero-explore-btn">
                 <Link href="/shop" className="explore-btn">
                   Explore Collections
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
