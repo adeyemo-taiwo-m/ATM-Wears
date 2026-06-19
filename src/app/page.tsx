@@ -271,7 +271,7 @@ export default function Home() {
     setIsSubmitted(true);
   };
 
-  const latestDrops = PRODUCTS.slice(0, 6);
+  const latestDrops = PRODUCTS.slice(0, 8);
 
   // Lookbook items lookup
   const lookbookProducts = {
