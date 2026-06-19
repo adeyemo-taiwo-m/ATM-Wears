@@ -906,7 +906,7 @@ button {
   display: flex;
   flex-direction: row;
   height: 100%;
-  width: 300vw; /* 3 slides */
+  width: 400vw; /* 4 slides */
   will-change: transform;
 }
 

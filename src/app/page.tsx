@@ -666,26 +666,26 @@ export default function Home() {
           <div className="lookbook-slide">
             <div className="slide-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/images/editorial-01.jpg" alt="Lookbook Slide 1" />
+              <img src="/assets/images/lookbook-01.jpg" alt="Lookbook Slide 1" />
               
               {/* Hotspots Container */}
               <div className="hotspot-container">
-                {renderHotspot('vw-001', { top: '42%', left: '33%' })}
-                {renderHotspot('vw-002', { top: '78%', left: '27%' })}
+                {renderHotspot('vw-006', { top: '48%', left: '52%' })}
+                {renderHotspot('vw-002', { top: '68%', left: '48%' })}
               </div>
             </div>
-            <div className="slide-content">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-4">[ LOOK_01 // SS26 ]</p>
-              <h2 className="slide-title">ABSENCE</h2>
+            <div className="slide-content" style={{ backgroundColor: 'rgba(146, 176, 198, 0.15)', borderColor: 'rgba(146, 176, 198, 0.3)' }}>
+              <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4" style={{ color: '#92B0C6' }}>[ LOOK_01 // PASTEL ]</p>
+              <h2 className="slide-title">PASTEL DENIM</h2>
               <p className="slide-desc">
-                When less becomes the loudest statement in the room. A curated study of volume, raw deadstock cotton, and structured simplicity tailored for Nigerian urban temperatures.
+                Casual, gender-fluid proportions in washed cotton fleece and relaxed-fit denim silhouettes. Designed for everyday ease.
               </p>
               <div className="mt-2 flex flex-col gap-2">
                 <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
-                <Link href="/product/vw-001" className="slide-shop-link">
-                  [ 01: Void Oversized Tee ]
+                <Link href="/product/vw-006" className="slide-shop-link" style={{ color: '#92B0C6' }}>
+                  [ 01: Ghost Long Sleeve ]
                 </Link>
-                <Link href="/product/vw-002" className="slide-shop-link">
+                <Link href="/product/vw-002" className="slide-shop-link" style={{ color: '#92B0C6' }}>
                   [ 02: Form Wide Trouser ]
                 </Link>
               </div>
@@ -696,27 +696,27 @@ export default function Home() {
           <div className="lookbook-slide">
             <div className="slide-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/images/editorial-02.jpg" alt="Lookbook Slide 2" />
+              <img src="/assets/images/lookbook-02.jpg" alt="Lookbook Slide 2" />
               
               {/* Hotspots Container */}
               <div className="hotspot-container">
-                {renderHotspot('vw-003', { top: '35%', left: '46%' })}
-                {renderHotspot('vw-005', { top: '55%', left: '43%' })}
+                {renderHotspot('vw-003', { top: '38%', left: '48%' })}
+                {renderHotspot('vw-002', { top: '68%', left: '50%' })}
               </div>
             </div>
-            <div className="slide-content">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-4">[ LOOK_02 // SS26 ]</p>
-              <h2 className="slide-title">FORM</h2>
+            <div className="slide-content" style={{ backgroundColor: 'rgba(90, 26, 123, 0.18)', borderColor: 'rgba(139, 92, 246, 0.35)' }}>
+              <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4" style={{ color: '#C084FC' }}>[ LOOK_02 // ROYAL ]</p>
+              <h2 className="slide-title">AMETHYST SHIELD</h2>
               <p className="slide-desc">
-                The physical body interpreted as modular architecture. Minimal seams, sculptural silhouettes, and unlined structures designed for quiet luxury and freedom of form.
+                High-contrast layering combining stark whites with structural deep violet outwear. Statement streetwear with clean cuts.
               </p>
               <div className="mt-2 flex flex-col gap-2">
                 <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
-                <Link href="/product/vw-003" className="slide-shop-link">
+                <Link href="/product/vw-003" className="slide-shop-link" style={{ color: '#C084FC' }}>
                   [ 03: Zero Jacket ]
                 </Link>
-                <Link href="/product/vw-005" className="slide-shop-link">
-                  [ 04: Structure Blazer ]
+                <Link href="/product/vw-002" className="slide-shop-link" style={{ color: '#C084FC' }}>
+                  [ 04: Form Wide Trouser ]
                 </Link>
               </div>
             </div>
@@ -726,27 +726,57 @@ export default function Home() {
           <div className="lookbook-slide">
             <div className="slide-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/images/hero-main.jpg" alt="Lookbook Slide 3" />
+              <img src="/assets/images/lookbook-03.jpg" alt="Lookbook Slide 3" />
               
               {/* Hotspots Container */}
               <div className="hotspot-container">
-                {renderHotspot('vw-004', { top: '65%', left: '48%' })}
-                {renderHotspot('vw-006', { top: '35%', left: '38%' })}
+                {renderHotspot('vw-001', { top: '35%', left: '48%' })}
+                {renderHotspot('vw-002', { top: '65%', left: '50%' })}
               </div>
             </div>
-            <div className="slide-content">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#FFD700] mb-4">[ LOOK_03 // SS26 ]</p>
-              <h2 className="slide-title">IDENTITY</h2>
+            <div className="slide-content" style={{ backgroundColor: 'rgba(255, 255, 255, 0.06)', borderColor: 'rgba(255, 255, 255, 0.15)' }}>
+              <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4" style={{ color: '#FFD700' }}>[ LOOK_03 // BRUTALIST ]</p>
+              <h2 className="slide-title">STREET ARCHIVE</h2>
               <p className="slide-desc">
-                Unisex apparel crafted strictly using organic local deadstock materials. A quiet commitment to zero carbon footprints, zero excess, and infinite expression.
+                Bold typography and raw styling. A statement of confidence blending oversized graphic layers and heavy denim stacks.
               </p>
               <div className="mt-2 flex flex-col gap-2">
                 <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
-                <Link href="/product/vw-004" className="slide-shop-link">
-                  [ 05: Void Maxi Dress ]
+                <Link href="/product/vw-001" className="slide-shop-link" style={{ color: '#FFD700' }}>
+                  [ 05: Void Oversized Tee ]
                 </Link>
-                <Link href="/product/vw-006" className="slide-shop-link">
-                  [ 06: Ghost Long Sleeve ]
+                <Link href="/product/vw-002" className="slide-shop-link" style={{ color: '#FFD700' }}>
+                  [ 06: Form Wide Trouser ]
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Slide 4 */}
+          <div className="lookbook-slide">
+            <div className="slide-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/images/lookbook-04.jpg" alt="Lookbook Slide 4" />
+              
+              {/* Hotspots Container */}
+              <div className="hotspot-container">
+                {renderHotspot('vw-001', { top: '32%', left: '52%' })}
+                {renderHotspot('vw-002', { top: '62%', left: '44%' })}
+              </div>
+            </div>
+            <div className="slide-content" style={{ backgroundColor: 'rgba(120, 130, 140, 0.15)', borderColor: 'rgba(120, 130, 140, 0.3)' }}>
+              <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4" style={{ color: '#94A3B8' }}>[ LOOK_04 // CONCRETE ]</p>
+              <h2 className="slide-title">ASPHALT ARCHIVE</h2>
+              <p className="slide-desc">
+                Concrete textures and urban transitions. Designed for navigation through city skylines and architectural landscapes.
+              </p>
+              <div className="mt-2 flex flex-col gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-[0.1em] opacity-50">Featuring:</span>
+                <Link href="/product/vw-001" className="slide-shop-link" style={{ color: '#94A3B8' }}>
+                  [ 07: Void Oversized Tee ]
+                </Link>
+                <Link href="/product/vw-002" className="slide-shop-link" style={{ color: '#94A3B8' }}>
+                  [ 08: Form Wide Trouser ]
                 </Link>
               </div>
             </div>
