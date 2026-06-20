@@ -63,12 +63,47 @@ export const Navbar: React.FC = () => {
               Manifesto
             </Link>
           </li>
+
+          {/* Mobile Only Header Actions (Search, Account, Cart) */}
+          <li className="md:hidden mt-8 w-full border-t border-void-bone/30 pt-8 flex flex-row justify-center gap-8 items-center">
+            <Link href="/search" aria-label="Search" className="nav-icon-btn scale-125 opacity-80 hover:opacity-100">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </Link>
+            <Link href="/account" aria-label="Account" className="nav-icon-btn scale-125 opacity-80 hover:opacity-100">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+            </Link>
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                openCart();
+              }}
+              aria-label="Cart"
+              className="nav-icon-btn relative scale-125 opacity-80 hover:opacity-100 cursor-pointer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg>
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 text-[9px] font-mono bg-void-charcoal text-void-white w-4.5 h-4.5 rounded-full flex items-center justify-center font-bold">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+          </li>
         </ul>
 
         {/* Actions */}
         <div className="nav-actions">
           {/* Search Trigger */}
-          <Link href="/search" aria-label="Search" className="nav-icon-btn">
+          <Link href="/search" aria-label="Search" className="nav-icon-btn hidden md:inline-flex">
             <svg
               width="18"
               height="18"
@@ -82,21 +117,6 @@ export const Navbar: React.FC = () => {
             </svg>
           </Link>
 
-          {/* Account */}
-          <Link href="/account" aria-label="Account" className="nav-icon-btn md:hidden">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-            </svg>
-          </Link>
-
           <Link href="/account" className="btn-nav-signin hidden md:inline-block">
             Sign In
           </Link>
@@ -105,7 +125,7 @@ export const Navbar: React.FC = () => {
           <button
             onClick={openCart}
             aria-label="Cart"
-            className="nav-icon-btn relative"
+            className="nav-icon-btn relative hidden md:inline-flex"
           >
             <svg
               width="18"

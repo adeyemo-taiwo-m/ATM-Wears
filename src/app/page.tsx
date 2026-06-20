@@ -110,51 +110,47 @@ export default function Home() {
       }
     });
 
-    // 3. Horizontal Scroll Timeline for Lookbook (Desktop Only)
-    const mm = gsap.matchMedia();
-    
-    mm.add("(min-width: 1024px)", () => {
-      const lookbookWrapper = horizontalWrapperRef.current;
-      const horizontalSection = horizontalSectionRef.current;
-      if (lookbookWrapper && horizontalSection) {
-        const horizTween = gsap.to(lookbookWrapper, {
-          x: () => -(lookbookWrapper.scrollWidth - window.innerWidth),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: horizontalSection,
-            pin: true,
-            scrub: 1,
-            start: 'top top',
-            end: () => `+=${lookbookWrapper.scrollWidth - window.innerWidth}`,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              const progressBar = document.getElementById('lookbook-progress');
-              if (progressBar) {
-                progressBar.style.width = `${self.progress * 100}%`;
-              }
+    // 3. Horizontal Scroll Timeline for Lookbook
+    const lookbookWrapper = horizontalWrapperRef.current;
+    const horizontalSection = horizontalSectionRef.current;
+    if (lookbookWrapper && horizontalSection) {
+      const horizTween = gsap.to(lookbookWrapper, {
+        x: () => -(lookbookWrapper.scrollWidth - window.innerWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: horizontalSection,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => `+=${lookbookWrapper.scrollWidth - window.innerWidth}`,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const progressBar = document.getElementById('lookbook-progress');
+            if (progressBar) {
+              progressBar.style.width = `${self.progress * 100}%`;
             }
           }
-        });
+        }
+      });
 
-        // Horizontal parallax for lookbook slide images
-        gsap.utils.toArray('.slide-media img').forEach((img: any) => {
-          gsap.fromTo(img,
-            { xPercent: -12 },
-            {
-              xPercent: 12,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: img,
-                containerAnimation: horizTween,
-                start: 'left right',
-                end: 'right left',
-                scrub: true,
-              }
+      // Horizontal parallax for lookbook slide images
+      gsap.utils.toArray('.slide-media img').forEach((img: any) => {
+        gsap.fromTo(img,
+          { xPercent: -12 },
+          {
+            xPercent: 12,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: img,
+              containerAnimation: horizTween,
+              start: 'left right',
+              end: 'right left',
+              scrub: true,
             }
-          );
-        });
-      }
-    });
+          }
+        );
+      });
+    }
 
     // 4. Manifesto Text Reveal on Scroll
     gsap.to('.reveal-word', {
@@ -186,7 +182,6 @@ export default function Home() {
     );
 
     return () => {
-      mm.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -423,29 +418,29 @@ export default function Home() {
           <div className="flex md:grid md:grid-cols-5 gap-6 overflow-x-auto md:overflow-x-visible pb-12 snap-x snap-mandatory scrollbar-none" id="hero-grid">
             
             {/* Column 1 */}
-            <div className="min-w-[280px] flex-shrink-0 snap-start md:min-w-0 flex flex-col gap-6 md:mt-16" id="hero-col-1">
-              <div className="hero-card hero-card-anim float-anim-1 relative aspect-[3/4] overflow-hidden rounded-t-3xl rounded-br-3xl bg-[#F05A28]">
+            <div className="contents md:flex md:flex-col md:gap-6 md:mt-16" id="hero-col-1">
+              <div className="hero-card hero-card-anim float-anim-1 relative aspect-[3/4] overflow-hidden rounded-t-3xl rounded-br-3xl bg-[#F05A28] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-orange.png" alt="Orange Streetwear Hoodie" className="w-full h-full object-cover" draggable="false" />
               </div>
-              <div className="hero-card hero-card-anim float-anim-2 relative aspect-square overflow-hidden rounded-3xl bg-[#F7C615]">
+              <div className="hero-card hero-card-anim float-anim-2 relative aspect-square overflow-hidden rounded-3xl bg-[#F7C615] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-kid.png" alt="Kid in suit" className="w-full h-full object-cover" draggable="false" />
               </div>
             </div>
 
             {/* Column 2 */}
-            <div className="min-w-[280px] flex-shrink-0 snap-start md:min-w-0 flex flex-col gap-6 md:mt-0" id="hero-col-2">
-              <div className="hero-card hero-card-anim float-anim-3 relative aspect-[3/5] overflow-hidden clip-folder-tab-right bg-[#5DB075]">
+            <div className="contents md:flex md:flex-col md:gap-6 md:mt-0" id="hero-col-2">
+              <div className="hero-card hero-card-anim float-anim-3 relative aspect-[3/5] overflow-hidden clip-folder-tab-right bg-[#5DB075] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-green-coat.png" alt="Model in green coat" className="w-full h-full object-cover" draggable="false" />
               </div>
             </div>
 
             {/* Column 3 */}
-            <div className="min-w-[280px] flex-shrink-0 snap-start md:min-w-0 flex flex-col items-center gap-8 md:mt-24" id="hero-col-3">
+            <div className="contents md:flex md:flex-col md:items-center md:gap-8 md:mt-24" id="hero-col-3">
               {/* Floral Decorative Icon */}
-              <div className="hero-card hero-card-anim text-[#F05A28]" id="hero-flower-icon">
+              <div className="hero-card hero-card-anim text-[#F05A28] hidden md:block" id="hero-flower-icon">
                 <svg width="40" height="40" viewBox="0 0 100 100" fill="currentColor">
                   <path d="M50 0 A15 15 0 0 0 35 15 A15 15 0 0 0 50 30 A15 15 0 0 0 65 15 A15 15 0 0 0 50 0 Z" />
                   <path d="M50 70 A15 15 0 0 0 35 85 A15 15 0 0 0 50 100 A15 15 0 0 0 65 85 A15 15 0 0 0 50 70 Z" />
@@ -454,7 +449,7 @@ export default function Home() {
                   <circle cx="50" cy="50" r="10" fill="currentColor" />
                 </svg>
               </div>
-              <div className="hero-card hero-card-anim float-anim-1 relative aspect-square overflow-hidden rounded-3xl bg-[#FFD700] w-full">
+              <div className="hero-card hero-card-anim float-anim-1 relative aspect-square overflow-hidden rounded-3xl bg-[#FFD700] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-yellow-portrait.png" alt="Yellow portrait model" className="w-full h-full object-cover" draggable="false" />
               </div>
@@ -470,20 +465,20 @@ export default function Home() {
             </div>
 
             {/* Column 4 */}
-            <div className="min-w-[280px] flex-shrink-0 snap-start md:min-w-0 flex flex-col gap-6 md:mt-0" id="hero-col-4">
-              <div className="hero-card hero-card-anim float-anim-2 relative aspect-[3/5] overflow-hidden clip-folder-tab-left bg-[#4CA3D9]">
+            <div className="contents md:flex md:flex-col md:gap-6 md:mt-0" id="hero-col-4">
+              <div className="hero-card hero-card-anim float-anim-2 relative aspect-[3/5] overflow-hidden clip-folder-tab-left bg-[#4CA3D9] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-blue-suit.png" alt="Model in white/blue outfit" className="w-full h-full object-cover" draggable="false" />
               </div>
             </div>
 
             {/* Column 5 */}
-            <div className="min-w-[280px] flex-shrink-0 snap-start md:min-w-0 flex flex-col gap-6 md:mt-16" id="hero-col-5">
-              <div className="hero-card hero-card-anim float-anim-3 relative aspect-[3/4] overflow-hidden clip-folder-tab-right bg-[#7DC89A]">
+            <div className="contents md:flex md:flex-col md:gap-6 md:mt-16" id="hero-col-5">
+              <div className="hero-card hero-card-anim float-anim-3 relative aspect-[3/4] overflow-hidden clip-folder-tab-right bg-[#7DC89A] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-sunglasses.png" alt="Model with heart sunglasses" className="w-full h-full object-cover" draggable="false" />
               </div>
-              <div className="hero-card hero-card-anim float-anim-1 relative aspect-square overflow-hidden rounded-3xl bg-[#2E6B4B]">
+              <div className="hero-card hero-card-anim float-anim-1 relative aspect-square overflow-hidden rounded-3xl bg-[#2E6B4B] w-[280px] shrink-0 snap-start md:w-full md:shrink">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/assets/images/hero-green-blazer.png" alt="Model in green blazer" className="w-full h-full object-cover" draggable="false" />
               </div>
