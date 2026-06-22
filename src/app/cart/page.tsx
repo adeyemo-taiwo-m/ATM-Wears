@@ -30,7 +30,6 @@ export default function CartPage() {
   const [purchasedItems, setPurchasedItems] = useState<typeof cartItems>([]);
   const [orderId, setOrderId] = useState('');
   const [orderTotal, setOrderTotal] = useState(0);
-  const [orderDiscount, setOrderDiscount] = useState<number>(0);
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
   const discountAmount = discount ? Math.round(subtotal * (discount.percent / 100)) : 0;
@@ -38,7 +37,8 @@ export default function CartPage() {
   const total = subtotal - discountAmount + shipping;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = e.target;
+    const name = e.target.name;
+    let value = e.target.value;
     if (name === 'cardNumber') {
       value = formatCardNumber(value).slice(0, 19);
     } else if (name === 'expiry') {
@@ -127,7 +127,6 @@ export default function CartPage() {
     }
     setPurchasedItems([...cartItems]);
     setOrderTotal(total);
-    setOrderDiscount(discountAmount);
     setOrderId(`ATM-${Date.now().toString().slice(-6)}-${Math.floor(1000 + Math.random() * 9000)}`);
     setCheckedOut(true);
     clearCart();
