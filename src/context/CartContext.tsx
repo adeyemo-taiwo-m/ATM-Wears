@@ -24,6 +24,7 @@ interface CartContextType {
   isCartOpen: boolean;
   addToCart: (product: Product, size: string) => void;
   removeFromCart: (id: string, size: string) => void;
+  updateQty: (id: string, size: string, qty: number) => void;
   openCart: () => void;
   closeCart: () => void;
   clearCart: () => void;
@@ -77,6 +78,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
+  const updateQty = (id: string, size: string, qty: number) => {
+    setCartItems((prevItems) => {
+      if (qty <= 0) {
+        return prevItems.filter((item) => !(item.id === id && item.size === size));
+      }
+      return prevItems.map((item) =>
+        item.id === id && item.size === size ? { ...item, qty } : item
+      );
+    });
+  };
+
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
   const clearCart = () => setCartItems([]);
@@ -88,6 +100,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isCartOpen,
         addToCart,
         removeFromCart,
+        updateQty,
         openCart,
         closeCart,
         clearCart,

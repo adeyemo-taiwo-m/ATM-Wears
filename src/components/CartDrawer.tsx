@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import Link from 'next/link';
 
 export const CartDrawer: React.FC = () => {
-  const { cartItems, isCartOpen, closeCart, removeFromCart } = useCart();
+  const { cartItems, isCartOpen, closeCart, removeFromCart, updateQty } = useCart();
   const drawerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -77,16 +77,33 @@ export const CartDrawer: React.FC = () => {
                   <img src={item.images[0]} alt={item.name} />
                 </div>
                 <div className="cart-item-info">
-                  <p className="cart-item-name">{item.name}</p>
-                  <p className="cart-item-meta">
-                    {item.size} · Qty {item.qty}
+                  <p className="cart-item-name font-medium">{item.name}</p>
+                  <p className="cart-item-meta text-[11px] uppercase tracking-wide">
+                    Size: {item.size}
                   </p>
-                  <p className="cart-item-price">
+                  <div className="flex items-center gap-2 mt-1">
+                    <button
+                      className="w-6 h-6 border border-void-bone flex items-center justify-center text-xs hover:border-void-charcoal hover:bg-void-bone transition-all font-mono active:scale-95"
+                      onClick={() => updateQty(item.id, item.size, item.qty - 1)}
+                      aria-label="Decrease quantity"
+                    >
+                      -
+                    </button>
+                    <span className="font-mono text-xs w-6 text-center text-void-charcoal font-medium">{item.qty}</span>
+                    <button
+                      className="w-6 h-6 border border-void-bone flex items-center justify-center text-xs hover:border-void-charcoal hover:bg-void-bone transition-all font-mono active:scale-95"
+                      onClick={() => updateQty(item.id, item.size, item.qty + 1)}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <p className="cart-item-price text-void-charcoal font-semibold mt-1">
                     ₦{(item.price * item.qty).toLocaleString()}
                   </p>
                 </div>
                 <button
-                  className="cart-item-remove"
+                  className="cart-item-remove text-xl"
                   onClick={() => removeFromCart(item.id, item.size)}
                   aria-label="Remove item"
                 >
